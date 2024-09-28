@@ -1,0 +1,48 @@
+class ODriveAxisSimulator:
+    def __init__(self):
+        self.calibrated = False
+        self.velocity_control = False
+        self.input_velocity = 0.0
+
+    def start_calibration_sequence(self):
+        print("Starting calibration sequence...")
+        # Simulate calibration process (emulate setting calibration parameters)
+        self.calibrated = True
+        print("Calibration complete!")
+
+    def enable_velocity_control(self):
+        if self.calibrated:
+            self.velocity_control = True
+            print("Velocity control enabled")
+        else:
+            print("Calibration required before enabling velocity control")
+
+    def set_input_velocity(self, velocity):
+        if self.velocity_control:
+            self.input_velocity = velocity
+            print(f"Input velocity set to {velocity}")
+        else:
+            print("Velocity control not enabled")
+
+    def simulate_control_loop(self):
+        # Simulate control loop here
+        if self.velocity_control:
+            print(f"Simulated motor velocity: {self.input_velocity}")
+        else:
+            print("Motor not in velocity control mode")
+
+def main():
+    axis_simulator = ODriveAxisSimulator()
+
+    # Simulate the calibration process
+    axis_simulator.start_calibration_sequence()
+
+    # Enable velocity control and set input velocity
+    axis_simulator.enable_velocity_control()
+    axis_simulator.set_input_velocity(3.0)
+
+    # Simulate control loop
+    axis_simulator.simulate_control_loop()
+
+if __name__ == "__main__":
+    main()

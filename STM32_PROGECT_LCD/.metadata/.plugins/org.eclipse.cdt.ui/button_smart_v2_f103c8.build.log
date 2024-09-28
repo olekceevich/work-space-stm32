@@ -1,0 +1,17 @@
+11:30:00 **** Incremental Build of configuration Debug for project button_smart_v2_f103c8 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "button_smart_v2_f103c8.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\user\Desktop\work space stm32\STM32_PROGECT_LCD\button_smart_v2_f103c8\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="button_smart_v2_f103c8.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: button_smart_v2_f103c8.elf
+ 
+arm-none-eabi-size   button_smart_v2_f103c8.elf 
+arm-none-eabi-objdump -h -S  button_smart_v2_f103c8.elf  > "button_smart_v2_f103c8.list"
+   text	   data	    bss	    dec	    hex	filename
+   7888	     20	   1716	   9624	   2598	button_smart_v2_f103c8.elf
+Finished building: default.size.stdout
+ 
+Finished building: button_smart_v2_f103c8.list
+ 
+
+11:30:01 Build Finished. 0 errors, 0 warnings. (took 958ms)
+
