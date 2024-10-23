@@ -1,35 +1,41 @@
-11:05:05 **** Incremental Build of configuration Debug for project button_smart_v2_f103c8 ****
+19:58:13 **** Incremental Build of configuration Debug for project nucleo334r8 ****
 make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "button_smart_v2_f103c8.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\user\Desktop\work space stm32\STM32_PROGECT_LCD\button_smart_v2_f103c8\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="button_smart_v2_f103c8.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: button_smart_v2_f103c8.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F334x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:120:3: warning: implicit declaration of function 'enableSensor' [-Wimplicit-function-declaration]
+  120 |   enableSensor();
+      |   ^~~~~~~~~~~~
+../Core/Src/main.c:131:11: warning: implicit declaration of function 'getRGB' [-Wimplicit-function-declaration]
+  131 |           getRGB(&red, &green, &blue);
+      |           ^~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:330:6: warning: conflicting types for 'enableSensor'; have 'void(void)'
+  330 | void enableSensor(void) {
+      |      ^~~~~~~~~~~~
+../Core/Src/main.c:120:3: note: previous implicit declaration of 'enableSensor' with type 'void(void)'
+  120 |   enableSensor();
+      |   ^~~~~~~~~~~~
+../Core/Src/main.c:337:6: warning: conflicting types for 'getRGB'; have 'void(uint16_t *, uint16_t *, uint16_t *)' {aka 'void(short unsigned int *, short unsigned int *, short unsigned int *)'}
+  337 | void getRGB(uint16_t *r, uint16_t *g, uint16_t *b) {
+      |      ^~~~~~
+../Core/Src/main.c:131:11: note: previous implicit declaration of 'getRGB' with type 'void(uint16_t *, uint16_t *, uint16_t *)' {aka 'void(short unsigned int *, short unsigned int *, short unsigned int *)'}
+  131 |           getRGB(&red, &green, &blue);
+      |           ^~~~~~
+arm-none-eabi-gcc -o "nucleo334r8.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\user\Desktop\work space stm32\STM32_PROGECT_LCD\nucleo334r8\STM32F334R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="nucleo334r8.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: nucleo334r8.elf
  
-arm-none-eabi-size   button_smart_v2_f103c8.elf 
-arm-none-eabi-objdump -h -S  button_smart_v2_f103c8.elf  > "button_smart_v2_f103c8.list"
+arm-none-eabi-size   nucleo334r8.elf 
+arm-none-eabi-objdump -h -S  nucleo334r8.elf  > "nucleo334r8.list"
    text	   data	    bss	    dec	    hex	filename
-   7908	     20	   1716	   9644	   25ac	button_smart_v2_f103c8.elf
+  17652	    100	   2124	  19876	   4da4	nucleo334r8.elf
 Finished building: default.size.stdout
  
-Finished building: button_smart_v2_f103c8.list
+Finished building: nucleo334r8.list
  
-11:05:08 **** Incremental Build of configuration Debug for project button_smart_v2_f103c8 ****
+19:58:52 **** Incremental Build of configuration Debug for project nucleo334r8 ****
 make -j4 all 
-arm-none-eabi-size   button_smart_v2_f103c8.elf 
+arm-none-eabi-size   nucleo334r8.elf 
    text	   data	    bss	    dec	    hex	filename
-   7908	     20	   1716	   9644	   25ac	button_smart_v2_f103c8.elf
+  17652	    100	   2124	  19876	   4da4	nucleo334r8.elf
 Finished building: default.size.stdout
- 
-11:30:00 **** Incremental Build of configuration Debug for project button_smart_v2_f103c8 ****
-make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "button_smart_v2_f103c8.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\user\Desktop\work space stm32\STM32_PROGECT_LCD\button_smart_v2_f103c8\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="button_smart_v2_f103c8.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: button_smart_v2_f103c8.elf
- 
-arm-none-eabi-size   button_smart_v2_f103c8.elf 
-arm-none-eabi-objdump -h -S  button_smart_v2_f103c8.elf  > "button_smart_v2_f103c8.list"
-   text	   data	    bss	    dec	    hex	filename
-   7888	     20	   1716	   9624	   2598	button_smart_v2_f103c8.elf
-Finished building: default.size.stdout
- 
-Finished building: button_smart_v2_f103c8.list
  

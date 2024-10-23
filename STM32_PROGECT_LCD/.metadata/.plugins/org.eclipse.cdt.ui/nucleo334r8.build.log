@@ -1,0 +1,10 @@
+19:58:52 **** Incremental Build of configuration Debug for project nucleo334r8 ****
+make -j4 all 
+arm-none-eabi-size   nucleo334r8.elf 
+   text	   data	    bss	    dec	    hex	filename
+  17652	    100	   2124	  19876	   4da4	nucleo334r8.elf
+Finished building: default.size.stdout
+ 
+
+19:58:53 Build Finished. 0 errors, 0 warnings. (took 258ms)
+
