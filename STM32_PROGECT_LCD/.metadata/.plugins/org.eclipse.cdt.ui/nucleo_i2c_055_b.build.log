@@ -1,0 +1,10 @@
+22:32:08 **** Incremental Build of configuration Debug for project nucleo_i2c_055_b ****
+make -j4 all 
+arm-none-eabi-size   nucleo_i2c_055_b.elf 
+   text	   data	    bss	    dec	    hex	filename
+  22720	    124	   2132	  24976	   6190	nucleo_i2c_055_b.elf
+Finished building: default.size.stdout
+ 
+
+22:32:08 Build Finished. 0 errors, 0 warnings. (took 251ms)
+

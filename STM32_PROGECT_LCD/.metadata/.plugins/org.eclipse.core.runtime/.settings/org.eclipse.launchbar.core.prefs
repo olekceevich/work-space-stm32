@@ -1,7 +1,7 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:button_smart_v2_f103c8 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:i2c_disc1,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:nucleo334r8
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:button_smart_v2_f103c8 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:i2c_disc1,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:nucleo_i2c_055_b,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:nucleo334r8,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:can_f1 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:can_1f_1m Debug
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:LCD/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:LCD/activeLaunchTarget=null\:---

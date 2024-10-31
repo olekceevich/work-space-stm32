@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;nucleo_i2c_055_b/Core/Inc/help_func.c&apos; to &apos;help_func.h&apos;" description="Rename resource &apos;help_func.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/help_func.c" name="help_func.h" stamp="1730355727418" updateReferences="true"/>
+</session>

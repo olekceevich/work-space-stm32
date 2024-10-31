@@ -1,41 +1,38 @@
-19:58:13 **** Incremental Build of configuration Debug for project nucleo334r8 ****
+21:40:32 **** Incremental Build of configuration Debug for project can_1f_1m ****
 make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F334x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:120:3: warning: implicit declaration of function 'enableSensor' [-Wimplicit-function-declaration]
-  120 |   enableSensor();
-      |   ^~~~~~~~~~~~
-../Core/Src/main.c:131:11: warning: implicit declaration of function 'getRGB' [-Wimplicit-function-declaration]
-  131 |           getRGB(&red, &green, &blue);
-      |           ^~~~~~
-../Core/Src/main.c: At top level:
-../Core/Src/main.c:330:6: warning: conflicting types for 'enableSensor'; have 'void(void)'
-  330 | void enableSensor(void) {
-      |      ^~~~~~~~~~~~
-../Core/Src/main.c:120:3: note: previous implicit declaration of 'enableSensor' with type 'void(void)'
-  120 |   enableSensor();
-      |   ^~~~~~~~~~~~
-../Core/Src/main.c:337:6: warning: conflicting types for 'getRGB'; have 'void(uint16_t *, uint16_t *, uint16_t *)' {aka 'void(short unsigned int *, short unsigned int *, short unsigned int *)'}
-  337 | void getRGB(uint16_t *r, uint16_t *g, uint16_t *b) {
-      |      ^~~~~~
-../Core/Src/main.c:131:11: note: previous implicit declaration of 'getRGB' with type 'void(uint16_t *, uint16_t *, uint16_t *)' {aka 'void(short unsigned int *, short unsigned int *, short unsigned int *)'}
-  131 |           getRGB(&red, &green, &blue);
-      |           ^~~~~~
-arm-none-eabi-gcc -o "nucleo334r8.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\user\Desktop\work space stm32\STM32_PROGECT_LCD\nucleo334r8\STM32F334R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="nucleo334r8.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: nucleo334r8.elf
+arm-none-eabi-gcc "../Core/Src/can.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/can.d" -MT"Core/Src/can.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/can.o"
+../Core/Src/can.c:78:17: warning: '_get_sdo_uint16' defined but not used [-Wunused-function]
+   78 | static uint16_t _get_sdo_uint16(uint16_t index, uint8_t sub_index) {
+      |                 ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "can_1f_1m.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\user\Desktop\work space stm32\STM32_PROGECT_LCD\can_1f_1m\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="can_1f_1m.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: can_1f_1m.elf
  
-arm-none-eabi-size   nucleo334r8.elf 
-arm-none-eabi-objdump -h -S  nucleo334r8.elf  > "nucleo334r8.list"
+arm-none-eabi-size   can_1f_1m.elf 
+arm-none-eabi-objdump -h -S  can_1f_1m.elf  > "can_1f_1m.list"
    text	   data	    bss	    dec	    hex	filename
-  17652	    100	   2124	  19876	   4da4	nucleo334r8.elf
+  15428	    100	   2028	  17556	   4494	can_1f_1m.elf
 Finished building: default.size.stdout
  
-Finished building: nucleo334r8.list
+Finished building: can_1f_1m.list
  
-19:58:52 **** Incremental Build of configuration Debug for project nucleo334r8 ****
+21:40:37 **** Incremental Build of configuration Debug for project can_1f_1m ****
 make -j4 all 
-arm-none-eabi-size   nucleo334r8.elf 
+arm-none-eabi-size   can_1f_1m.elf 
    text	   data	    bss	    dec	    hex	filename
-  17652	    100	   2124	  19876	   4da4	nucleo334r8.elf
+  15428	    100	   2028	  17556	   4494	can_1f_1m.elf
 Finished building: default.size.stdout
+ 
+21:45:43 **** Incremental Build of configuration Debug for project can_1f_1m ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/can.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/can.d" -MT"Core/Src/can.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/can.o"
+arm-none-eabi-gcc -o "can_1f_1m.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\user\Desktop\work space stm32\STM32_PROGECT_LCD\can_1f_1m\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="can_1f_1m.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: can_1f_1m.elf
+ 
+arm-none-eabi-size   can_1f_1m.elf 
+arm-none-eabi-objdump -h -S  can_1f_1m.elf  > "can_1f_1m.list"
+   text	   data	    bss	    dec	    hex	filename
+  16068	    100	   2028	  18196	   4714	can_1f_1m.elf
+Finished building: default.size.stdout
+ 
+Finished building: can_1f_1m.list
  

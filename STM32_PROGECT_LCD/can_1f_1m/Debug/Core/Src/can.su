@@ -1,0 +1,11 @@
+../Core/Src/can.c:51:6:CAN_Init	8	static
+../Core/Src/can.c:65:6:StartActivationProcess	16	static
+../Core/Src/can.c:78:17:_get_sdo_uint16	96	static
+../Core/Src/can.c:125:6:CAN_ProcessStateMachine	88	static
+../Core/Src/can.c:275:6:process_CAN_message	288	static
+../Core/Src/can.c:294:6:HAL_CAN_RxFifo0MsgPendingCallback	56	static
+../Core/Src/can.c:303:16:send_command	48	static
+../Core/Src/can.c:329:16:wait_for_heartbeat	24	static
+../Core/Src/can.c:350:13:CAN_ConfigFilter	48	static
+../Core/Src/can.c:370:6:LogMessage	16	static
+../Core/Src/can.c:375:6:LogError	16	static
