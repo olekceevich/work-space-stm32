@@ -1,0 +1,5 @@
+../Core/Src/can.c:9:6:CAN1_Init_Custom	48	static
+../Core/Src/can.c:48:6:HAL_CAN_RxFifo0MsgPendingCallback	104	static
+../Core/Src/can.c:80:6:LED_Manage_Output	72	static
+../Core/Src/can.c:88:6:Send_response	48	static
+../Core/Src/can.c:107:6:Error_handler	8	static,ignoring_inline_asm

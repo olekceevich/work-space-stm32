@@ -1,0 +1,20 @@
+/*
+ * SM1810C.h
+ *
+ *  Created on: Nov 1, 2024
+ *      Author: user
+ */
+
+#ifndef INC_SM1810C_H_
+#define INC_SM1810C_H_
+
+#include "main.h"
+#include "stm32f4xx_hal.h"
+#include <stdint.h>
+
+// SM1810C sensor CAN functions
+void SM1810C_Init(void);
+void SM1810C_RequestData(void);
+void SM1810C_ProcessResponse(void);
+
+#endif /* INC_SM1810C_H_ */

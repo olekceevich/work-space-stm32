@@ -1,0 +1,27 @@
+/*
+ * SM1810C.h
+ *
+ *  Created on: Nov 1, 2024
+ *      Author: user
+ */
+
+#ifndef INC_SM1810C_H_
+#define INC_SM1810C_H_
+
+#include "main.h"
+#include "stm32f4xx_hal.h"
+#include <stdint.h>
+
+// Инициализация CAN для работы с датчиком SM1810C
+void SM1810C_Init(void);
+
+// Отправка запроса данных на датчик SM1810C
+void SM1810C_RequestData(void);
+
+// Обработка ответа от датчика SM1810C
+void SM1810C_ProcessResponse(void);
+
+// Основная функция стейт-машины для управления запросом и ответом
+void SM1810C_StateMachine(void);
+
+#endif /* INC_SM1810C_H_ */

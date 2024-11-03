@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;f4z_can_SM1810C/Core/Inc/SM1810C.h&apos; to &apos;can.h&apos;" description="Rename resource &apos;SM1810C.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/SM1810C.h" name="can.h" stamp="1730628686460" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;f4z_can_SM1810C/Core/Src/SM1810C.c&apos; to &apos;can.c&apos;" description="Rename resource &apos;SM1810C.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Src/SM1810C.c" name="can.c" stamp="1730628697545" updateReferences="true"/>
+</session>

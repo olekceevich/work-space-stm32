@@ -1,0 +1,61 @@
+11:29:36 **** Incremental Build of configuration Debug for project can_stract_f4v ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/can.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/can.d" -MT"Core/Src/can.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/can.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/can.c: In function 'CAN1_Tx':
+../Core/Src/can.c:63:5: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+   63 |     sprintf(msg, "Sending CAN Message: %s\r\n", data);
+      |     ^~~~~~~
+../Core/Src/can.c:3:1: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+    2 | #include "main.h"
+  +++ |+#include <stdio.h>
+    3 | 
+../Core/Src/can.c:63:5: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+   63 |     sprintf(msg, "Sending CAN Message: %s\r\n", data);
+      |     ^~~~~~~
+../Core/Src/can.c:63:5: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/can.c:64:47: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+   64 |     HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);  // Логирование
+      |                                               ^~~~~~
+../Core/Src/can.c:3:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    2 | #include "main.h"
+  +++ |+#include <string.h>
+    3 | 
+../Core/Src/can.c:64:47: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   64 |     HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);  // Логирование
+      |                                               ^~~~~~
+../Core/Src/can.c:64:47: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/can.c: In function 'CAN1_Rx':
+../Core/Src/can.c:83:9: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+   83 |         sprintf(msg, "Message Received: %s\r\n", receivedData);
+      |         ^~~~~~~
+../Core/Src/can.c:83:9: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/can.c:84:51: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+   84 |         HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+      |                                                   ^~~~~~
+../Core/Src/can.c:84:51: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/can.c: In function 'HAL_CAN_RxFifo0MsgPendingCallback':
+../Core/Src/can.c:112:9: warning: incompatible implicit declaration of built-in function 'sprintf' [-Wbuiltin-declaration-mismatch]
+  112 |         sprintf(msg, "Message Received: %s\r\n", rcvd_msg);
+      |         ^~~~~~~
+../Core/Src/can.c:112:9: note: include '<stdio.h>' or provide a declaration of 'sprintf'
+../Core/Src/can.c:113:51: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  113 |         HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+      |                                                   ^~~~~~
+../Core/Src/can.c:113:51: note: include '<string.h>' or provide a declaration of 'strlen'
+arm-none-eabi-gcc -o "can_stract_f4v.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\user\Desktop\work space stm32\STM32_PROGECT_LCD\can_stract_f4v\STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="can_stract_f4v.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: can_stract_f4v.elf
+ 
+arm-none-eabi-size   can_stract_f4v.elf 
+arm-none-eabi-objdump -h -S  can_stract_f4v.elf  > "can_stract_f4v.list"
+   text	   data	    bss	    dec	    hex	filename
+  17568	    100	   2084	  19752	   4d28	can_stract_f4v.elf
+Finished building: default.size.stdout
+ 
+Finished building: can_stract_f4v.list
+ 
+
+11:29:37 Build Finished. 0 errors, 8 warnings. (took 1s.367ms)
+

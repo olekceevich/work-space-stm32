@@ -1,0 +1,115 @@
+#include "can.h"
+#include "main.h"
+
+// Экземпляры и внешние переменные
+extern CAN_HandleTypeDef hcan1;
+extern UART_HandleTypeDef huart2;
+
+// Функция инициализации CAN
+void CAN1_Init(void) {
+    // Базовая инициализация CAN
+    if (HAL_CAN_Init(&hcan1) != HAL_OK) {
+        Error_handler();
+    }
+
+    // Настройка фильтра для приема сообщений CAN
+    CAN_FilterTypeDef canFilter;
+    canFilter.FilterActivation = ENABLE;
+    canFilter.FilterBank = 0;
+    canFilter.FilterFIFOAssignment = CAN_RX_FIFO0;
+    canFilter.FilterIdHigh = 0x0000;
+    canFilter.FilterIdLow = 0x0000;
+    canFilter.FilterMaskIdHigh = 0x0000;
+    canFilter.FilterMaskIdLow = 0x0000;
+    canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
+    canFilter.FilterScale = CAN_FILTERSCALE_32BIT;
+
+    if (HAL_CAN_ConfigFilter(&hcan1, &canFilter) != HAL_OK) {
+        Error_handler();
+    }
+
+    // Включение уведомлений для CAN
+    if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_TX_MAILBOX_EMPTY | CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_BUSOFF) != HAL_OK) {
+        Error_handler();
+    }
+
+    // Запуск CAN
+    if (HAL_CAN_Start(&hcan1) != HAL_OK) {
+        Error_handler();
+    }
+}
+
+// Функция передачи сообщения по CAN
+void CAN1_Tx(uint8_t *data, uint8_t length) {
+    CAN_TxHeaderTypeDef TxHeader;
+    uint32_t TxMailbox;
+
+    // Настройка заголовка сообщения CAN
+    TxHeader.DLC = length;                // Длина сообщения
+    TxHeader.StdId = 0x65D;               // Стандартный ID
+    TxHeader.IDE = CAN_ID_STD;            // Стандартный формат идентификатора
+    TxHeader.RTR = CAN_RTR_DATA;          // Тип сообщения - данные
+
+    // Отправка сообщения
+    if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, data, &TxMailbox) != HAL_OK) {
+        Error_handler();
+    }
+}
+
+// Функция приема сообщения по CAN и передачи его по UART
+void CAN1_Rx(void) {
+    CAN_RxHeaderTypeDef RxHeader;
+    uint8_t receivedData[8];
+    char msg[50];
+
+    // Получение сообщения из FIFO0
+    if (HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &RxHeader, receivedData) == HAL_OK) {
+        sprintf(msg, "Message Received: %s\r\n", receivedData);
+        HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+    } else {
+        Error_handler();
+    }
+}
+
+// Обработчик прерываний для завершения передачи по почтовым ящикам CAN
+void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan) {
+    char msg[50];
+    sprintf(msg, "Message Transmitted: Mailbox 0\r\n");
+    HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+}
+
+void HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef *hcan) {
+    char msg[50];
+    sprintf(msg, "Message Transmitted: Mailbox 1\r\n");
+    HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+}
+
+void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan) {
+    char msg[50];
+    sprintf(msg, "Message Transmitted: Mailbox 2\r\n");
+    HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+}
+
+// Обработчик прерываний для приема сообщений по CAN (FIFO0)
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
+    CAN_RxHeaderTypeDef RxHeader;
+    uint8_t rcvd_msg[8];
+    char msg[50];
+
+    // Чтение сообщения из FIFO0
+    if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, rcvd_msg) == HAL_OK) {
+        sprintf(msg, "Message Received: %s\r\n", rcvd_msg);
+        HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+    } else {
+        Error_handler();
+    }
+}
+
+// Обработчик ошибок CAN
+void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan) {
+    char msg[50];
+    sprintf(msg, "CAN Error Detected\r\n");
+    HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+}
+
+

@@ -1,0 +1,97 @@
+#include "SM1810C.h"
+#include "stm32f4xx_hal_uart.h"
+#include <stdio.h>
+#include <string.h>
+
+extern CAN_HandleTypeDef hcan1;
+extern UART_HandleTypeDef huart2;
+
+static CAN_TxHeaderTypeDef TxHeader;
+static CAN_RxHeaderTypeDef RxHeader;
+static uint8_t TxData[8];
+static uint8_t RxData[8];
+static uint32_t TxMailbox;
+
+void SM1810C_Init(void) {
+    // Настройка заголовка CAN
+    TxHeader.StdId = 0x01;       // ID устройства SM1810C
+    TxHeader.RTR = CAN_RTR_DATA; // Data frame
+    TxHeader.IDE = CAN_ID_STD;   // Standard frame
+    TxHeader.DLC = 6;            // Data length for query command
+
+    // Настройка фильтра для приёма сообщений только от устройства с ID 0x01
+    CAN_FilterTypeDef sFilterConfig;
+       sFilterConfig.FilterBank = 0;
+       sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+       sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
+       sFilterConfig.FilterIdHigh = 0x0000;
+       sFilterConfig.FilterIdLow = 0x0000;
+       sFilterConfig.FilterMaskIdHigh = 0x0000;
+       sFilterConfig.FilterMaskIdLow = 0x0000;
+       sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
+       sFilterConfig.FilterActivation = ENABLE;
+
+    if (HAL_CAN_ConfigFilter(&hcan1, &sFilterConfig) != HAL_OK) {
+        char error_msg[] = "Error configuring CAN filter\r\n";
+        HAL_UART_Transmit(&huart2, (uint8_t*)error_msg, strlen(error_msg), HAL_MAX_DELAY);
+    }
+
+    // Запуск CAN
+    if (HAL_CAN_Start(&hcan1) != HAL_OK) {
+        char error_msg[] = "Error starting CAN\r\n";
+        HAL_UART_Transmit(&huart2, (uint8_t*)error_msg, strlen(error_msg), HAL_MAX_DELAY);
+    }
+
+    // Включаем прерывание для приёма сообщений
+    if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK) {
+        char error_msg[] = "Error activating CAN notifications\r\n";
+        HAL_UART_Transmit(&huart2, (uint8_t*)error_msg, strlen(error_msg), HAL_MAX_DELAY);
+    }
+    char init_msg[] = "SM1810C initialized and ready.\r\n";
+    HAL_UART_Transmit(&huart2, (uint8_t*)init_msg, strlen(init_msg), HAL_MAX_DELAY);
+}
+
+void SM1810C_RequestData(void) {
+    // Команда запроса данных температуры и влажности для SM1810C
+    TxData[0] = 0x01; // Frame type
+    TxData[1] = 0x03; // Function code for reading data
+    TxData[2] = 0x00; // Starting address high byte
+    TxData[3] = 0x00; // Starting address low byte
+    TxData[4] = 0x00; // Data length high byte
+    TxData[5] = 0x02; // Data length low byte (requesting two data points)
+
+    // Отправка CAN сообщения
+    if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, TxData, &TxMailbox) != HAL_OK) {
+        char error_msg[] = "Error sending CAN message\r\n";
+        HAL_UART_Transmit(&huart2, (uint8_t*)error_msg, strlen(error_msg), HAL_MAX_DELAY);
+    } else {
+        char success_msg[] = "Query sent successfully\r\n";
+        HAL_UART_Transmit(&huart2, (uint8_t*)success_msg, strlen(success_msg), HAL_MAX_DELAY);
+    }
+}
+
+void SM1810C_ProcessResponse(void) {
+    // Проверяем наличие сообщения в FIFO0
+    if (HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK) {
+        // Проверка ID устройства и длины сообщения
+        if (RxHeader.StdId == 0x01 && RxHeader.DLC == 7) {
+            // Раскодируем температуру и влажность
+            uint16_t temperature_raw = (RxData[3] << 8) | RxData[4];
+            float temperature = temperature_raw / 100.0f;
+
+            uint16_t humidity_raw = (RxData[5] << 8) | RxData[6];
+            float humidity = humidity_raw / 100.0f;
+
+            // Логируем принятые данные
+            char buffer[64];
+            snprintf(buffer, sizeof(buffer), "Received data - Temperature: %.2f°C, Humidity: %.2f%%RH\r\n", temperature, humidity);
+            HAL_UART_Transmit(&huart2, (uint8_t*)buffer, strlen(buffer), HAL_MAX_DELAY);
+        } else {
+            char error_msg[] = "Invalid CAN response received. Check StdId or DLC.\r\n";
+            HAL_UART_Transmit(&huart2, (uint8_t*)error_msg, strlen(error_msg), HAL_MAX_DELAY);
+        }
+    } else {
+        char error_msg[] = "No CAN response. Waiting for message in FIFO0...\r\n";
+        HAL_UART_Transmit(&huart2, (uint8_t*)error_msg, strlen(error_msg), HAL_MAX_DELAY);
+    }
+}

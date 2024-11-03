@@ -1,0 +1,10 @@
+12:27:32 **** Incremental Build of configuration Debug for project f4z_can_SM1810C ****
+make -j4 all 
+arm-none-eabi-size   f4z_can_SM1810C.elf 
+   text	   data	    bss	    dec	    hex	filename
+  17276	    100	   2084	  19460	   4c04	f4z_can_SM1810C.elf
+Finished building: default.size.stdout
+ 
+
+12:27:33 Build Finished. 0 errors, 0 warnings. (took 245ms)
+

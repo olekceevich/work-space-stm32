@@ -1,17 +1,10 @@
-21:45:43 **** Incremental Build of configuration Debug for project can_1f_1m ****
+21:08:39 **** Build of configuration Debug for project can_1f_1m ****
 make -j4 all 
-arm-none-eabi-gcc "../Core/Src/can.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/can.d" -MT"Core/Src/can.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/can.o"
-arm-none-eabi-gcc -o "can_1f_1m.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\user\Desktop\work space stm32\STM32_PROGECT_LCD\can_1f_1m\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="can_1f_1m.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: can_1f_1m.elf
- 
 arm-none-eabi-size   can_1f_1m.elf 
-arm-none-eabi-objdump -h -S  can_1f_1m.elf  > "can_1f_1m.list"
    text	   data	    bss	    dec	    hex	filename
   16068	    100	   2028	  18196	   4714	can_1f_1m.elf
 Finished building: default.size.stdout
  
-Finished building: can_1f_1m.list
- 
 
-21:45:44 Build Finished. 0 errors, 0 warnings. (took 820ms)
+21:08:39 Build Finished. 0 errors, 0 warnings. (took 641ms)
 
