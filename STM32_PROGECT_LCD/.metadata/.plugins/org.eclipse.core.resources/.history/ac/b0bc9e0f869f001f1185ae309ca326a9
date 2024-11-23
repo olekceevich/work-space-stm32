@@ -1,0 +1,153 @@
+#include "can.h"
+#include "stm32f1xx_hal_uart.h"
+#include <stdio.h>
+#include <string.h>
+
+#define LEFT_WHEEL_ID 3  // Идентификатор колеса
+#define RAW_CAN_BOOTLOADER_HEARTBEAT_ARBITRATION_CODE 0x700
+#define RAW_CAN_RESPONSE_ARBITRATION_CODE 0x580
+
+const uint8_t ACTIVATION_COMMAND[2] = {0x10, 0x10}; // Команда активации
+const uint8_t EXPECTED_REPLY[2] = {0xAA, 0xBB};     // Ожидаемый ответ от устройства
+
+extern CAN_HandleTypeDef hcan;
+extern UART_HandleTypeDef huart2;
+
+void LogMessage(const char *message);
+void LogError(const char *message);
+static uint8_t send_command(uint8_t *data, uint8_t len);
+void process_CAN_message(uint16_t received_ID, uint8_t *data, uint8_t DLC);
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan);
+void StartActivationProcess(void);
+static void CAN_ConfigFilter(void);
+static uint8_t wait_for_heartbeat(uint32_t timeout_ms);  // Добавлен прототип функции
+
+void StartActivationProcess(void) {
+    CAN_ConfigFilter();
+
+    if (HAL_CAN_Start(&hcan) != HAL_OK) {
+        LogError("StartActivation: Error starting CAN");
+        return;
+    }
+    LogMessage("StartActivation: CAN started successfully");
+
+    // Проверка heartbeat загрузчика
+    LogMessage("Waiting for bootloader heartbeat...");
+    if (!wait_for_heartbeat(6000)) {
+        LogError("Failed to receive bootloader heartbeat.");
+        return;
+    }
+    LogMessage("Bootloader heartbeat received.");
+
+    // Отправка команды активации
+    LogMessage("Sending activation command...");
+    if (send_command((uint8_t*)ACTIVATION_COMMAND, sizeof(ACTIVATION_COMMAND))) {
+        LogMessage("Activation command sent successfully. Waiting for device confirmation...");
+    } else {
+        LogError("Failed to send activation command.");
+        return;
+    }
+}
+
+// Отправка команды по CAN
+static uint8_t send_command(uint8_t *data, uint8_t len) {
+    CAN_TxHeaderTypeDef TxHeader;
+    uint32_t TxMailbox;
+    TxHeader.StdId = LEFT_WHEEL_ID;
+    TxHeader.RTR = CAN_RTR_DATA;
+    TxHeader.IDE = CAN_ID_STD;
+    TxHeader.DLC = len;
+
+    if (HAL_CAN_AddTxMessage(&hcan, &TxHeader, data, &TxMailbox) != HAL_OK) {
+        LogError("Error sending command to CAN.");
+        return 0;
+    }
+
+    char logBuffer[100];
+    snprintf(logBuffer, sizeof(logBuffer),
+             "Sent CAN message: ID=0x%08lX, Data=[%02X, %02X]",  // Изменено на %08lX
+             (unsigned long)TxHeader.StdId, data[0], data[1]);
+    LogMessage(logBuffer);
+
+    uint32_t startTime = HAL_GetTick();
+    while (HAL_CAN_IsTxMessagePending(&hcan, TxMailbox)) {
+        if (HAL_GetTick() - startTime > 500) {
+            LogError("Timeout waiting for message to be sent.");
+            return 0;
+        }
+    }
+
+    LogMessage("Message sent successfully from TxMailbox");
+    return 1;
+}
+
+// Ожидание heartbeat с загрузчика
+static uint8_t wait_for_heartbeat(uint32_t timeout_ms) {
+    uint32_t start_time = HAL_GetTick();
+    uint8_t heartbeat_received = 0;
+
+    while ((HAL_GetTick() - start_time) < timeout_ms) {
+        if (heartbeat_received) {
+            LogMessage("Expected heartbeat received.");
+            return 1;
+        }
+        HAL_Delay(10);
+    }
+    LogMessage("Timeout: heartbeat not received.");
+    return 0;
+}
+
+// Обработка входящих сообщений CAN
+void process_CAN_message(uint16_t received_ID, uint8_t *data, uint8_t DLC) {
+    char logBuffer[200];
+    snprintf(logBuffer, sizeof(logBuffer),
+             "Received CAN message: ID=0x%X, DLC=%d, Data=[%02X, %02X, %02X, %02X, %02X, %02X, %02X, %02X]",
+             received_ID, DLC, data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]);
+    LogMessage(logBuffer);
+
+    if (received_ID == (LEFT_WHEEL_ID | RAW_CAN_RESPONSE_ARBITRATION_CODE) &&
+        data[0] == EXPECTED_REPLY[0] && data[1] == EXPECTED_REPLY[1]) {
+        LogMessage("Activation confirmed by the device.");
+    }
+}
+
+// Прерывание по приему CAN сообщения
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
+    CAN_RxHeaderTypeDef RxHeader;
+    uint8_t RxData[8];
+
+    while (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK) {
+        process_CAN_message(RxHeader.StdId, RxData, RxHeader.DLC);
+    }
+}
+
+// Конфигурация фильтра CAN
+static void CAN_ConfigFilter(void) {
+    CAN_FilterTypeDef FilterConfig = {0};
+    FilterConfig.FilterBank = 0;
+    FilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+    FilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
+    FilterConfig.FilterIdHigh = 0x0000;
+    FilterConfig.FilterIdLow = 0x0000;
+    FilterConfig.FilterMaskIdHigh = 0x0000;
+    FilterConfig.FilterMaskIdLow = 0x0000;
+    FilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
+    FilterConfig.FilterActivation = ENABLE;
+
+    if (HAL_CAN_ConfigFilter(&hcan, &FilterConfig) != HAL_OK) {
+        LogError("CAN_ConfigFilter: Filter configuration failed");
+        Error_Handler();
+    } else {
+        LogMessage("CAN_ConfigFilter: Filter configured successfully (all messages pass)");
+    }
+}
+
+// Логирование через UART
+void LogMessage(const char *message) {
+    HAL_UART_Transmit(&huart2, (uint8_t*)message, strlen(message), HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (uint8_t*)"\n\r", 2, HAL_MAX_DELAY);
+}
+
+void LogError(const char *message) {
+    LogMessage(message);
+}

@@ -1,0 +1,10 @@
+can.c:32:6:CAN_Init	3
+can.c:48:6:StartActivationProcess	1
+can.c:54:6:CAN_ProcessStateMachine	24
+can.c:216:6:process_CAN_message	7
+can.c:236:6:HAL_CAN_RxFifo0MsgPendingCallback	2
+can.c:244:16:send_command	4
+can.c:269:6:change_node_id	9
+can.c:342:13:CAN_ConfigFilter	2
+can.c:361:6:LogMessage	1
+can.c:366:6:LogError	1

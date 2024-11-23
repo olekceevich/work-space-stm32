@@ -1,0 +1,10 @@
+21:01:18 **** Incremental Build of configuration Debug for project SM1810C_can_temper ****
+make -j4 all 
+arm-none-eabi-size   SM1810C_can_temper.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16804	    100	   2084	  18988	   4a2c	SM1810C_can_temper.elf
+Finished building: default.size.stdout
+ 
+
+21:01:19 Build Finished. 0 errors, 0 warnings. (took 246ms)
+

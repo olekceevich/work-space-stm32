@@ -1,1 +1,3 @@
 1730632218639	Rename resource 'f4z_can_SM1810C'
+1731172476554	Delete resource 'can_stract_f4v2_index_active/Core/Src/can_constants.c'
+1731172631034	Delete resource 'can_stract_f4v2_index_active/Core/Inc/can_constants.h'

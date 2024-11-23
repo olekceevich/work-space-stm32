@@ -1,0 +1,24 @@
+#ifndef CAN_H
+#define CAN_H
+
+#include "stm32f4xx_hal.h"  // Замените на подходящую библиотеку HAL для вашего контроллера
+#include <stdint.h>
+#include <string.h>
+#include <stdio.h>
+
+// Функции для работы с CAN
+void CAN1_Init(void);
+void CAN1_Send(uint32_t stdId, uint8_t *data, uint8_t length);
+void CAN1_Receive(void);
+void RequestTemperatureData(void);
+void ProcessReceivedMessage(CAN_RxHeaderTypeDef *RxHeader, uint8_t *data);
+
+// Логирование
+void LogInfo(const char *message);
+void LogError(const char *message);
+
+// Обработка ошибок
+void Error_handler(void);
+
+
+#endif // CAN_H

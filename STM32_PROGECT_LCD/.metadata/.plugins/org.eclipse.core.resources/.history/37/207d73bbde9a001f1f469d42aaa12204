@@ -1,0 +1,7 @@
+#include "can.h"
+#include "main.h"
+
+// Экземпляры и внешние переменные
+extern CAN_HandleTypeDef hcan1;
+extern UART_HandleTypeDef huart2;
+

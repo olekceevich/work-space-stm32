@@ -1,0 +1,15 @@
+main.c:99:10:crc_chk	4
+main.c:115:6:send_command	2
+main.c:126:6:log_message	1
+main.c:130:9:check_calibration_response	3
+main.c:140:6:send_calibration_command	2
+main.c:158:6:beep	3
+main.c:168:6:read_register	1
+main.c:181:6:process_state_machine	11
+main.c:254:5:main	1
+main.c:300:6:SystemClock_Config	3
+main.c:347:13:MX_TIM11_Init	2
+main.c:378:13:MX_USART1_UART_Init	2
+main.c:411:13:MX_USART2_UART_Init	2
+main.c:444:13:MX_GPIO_Init	1
+main.c:477:6:Error_Handler	1

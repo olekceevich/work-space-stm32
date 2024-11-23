@@ -1,12 +1,14 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:button_smart_v2_f103c8 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:i2c_disc1,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:nucleo_i2c_055_b,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:nucleo334r8,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:can_f1 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:can_1f_1m Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:can_stract_f4v Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:f4z_can_SM1810C Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:f4z_can_resive
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:button_smart_v2_f103c8 Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:i2c_disc1,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:nucleo_i2c_055_b,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:nucleo334r8,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:can_1f_1m Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:f4z_can_SM1810C Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:f4z_can_resive,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:SM1810C_can_temper,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:can_stract_f4v Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:can_stract_f4v,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:can_f1 Debug
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:LCD/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:LCD/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:SM1810C_can_temper/activeLaunchMode=debug
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:SM1810C_can_temper/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:button_smart_v2_f103c8\ Debug/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:button_smart_v2_f103c8\ Debug/activeLaunchTarget=null\:---
-org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:can_stract_f4v\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:can_stract_f4v\ Debug/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:f4z_can_SM1810C\ Debug/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:nucleo334r8/activeLaunchMode=debug

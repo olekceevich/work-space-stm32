@@ -1,0 +1,19 @@
+#ifndef CAN_H
+#define CAN_H
+
+#include "stm32f4xx_hal.h"  // Библиотека HAL для STM32F4
+#include <stdint.h>
+#include <string.h>
+#include <stdio.h>
+
+extern volatile uint8_t requestTemperature; // Объявление переменной
+
+
+void LogInfo(const char *message);
+void LogError(const char *message);
+
+
+void Error_handler(void);
+
+
+#endif // CAN_H

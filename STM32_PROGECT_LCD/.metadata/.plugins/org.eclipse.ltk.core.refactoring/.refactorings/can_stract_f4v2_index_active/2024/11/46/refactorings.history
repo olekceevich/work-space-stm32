@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;can_stract_f4v2_index_active/can_stract_f4v.ioc&apos; to &apos;can_stract_f4v2_index_active.ioc&apos;" description="Rename resource &apos;can_stract_f4v.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="can_stract_f4v.ioc" name="can_stract_f4v2_index_active.ioc" stamp="1731237501364" updateReferences="true"/>
+</session>

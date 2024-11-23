@@ -1,0 +1,7 @@
+../Core/Src/can.c:28:6:CAN1_Init	5
+../Core/Src/can.c:66:6:CAN_SendHeartbeat	2
+../Core/Src/can.c:85:6:HAL_CAN_RxFifo0MsgPendingCallback	2
+../Core/Src/can.c:101:6:UpdateHeartbeatState	1
+../Core/Src/can.c:107:6:CheckButtonAndSendHeartbeat	2
+../Core/Src/can.c:115:6:Heartbeat_Loop	1
+../Core/Src/can.c:124:6:Error_handler	1

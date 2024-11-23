@@ -1,0 +1,13 @@
+../Core/Src/can.c:58:6:CAN_Init	8	static
+../Core/Src/can.c:74:6:StartActivationProcess	8	static
+../Core/Src/can.c:79:6:CAN_ProcessStateMachine	16	static
+../Core/Src/can.c:214:6:process_CAN_message	296	static
+../Core/Src/can.c:249:6:HAL_CAN_RxFifo0MsgPendingCallback	56	static
+../Core/Src/can.c:257:16:send_command	56	static
+../Core/Src/can.c:284:7:check_wheel_sdo	336	static
+../Core/Src/can.c:375:7:release_brake	168	static
+../Core/Src/can.c:410:7:rotate_wheel_one_meter	336	static
+../Core/Src/can.c:580:10:calculate_speed_for_distance	24	static
+../Core/Src/can.c:584:13:CAN_ConfigFilter	48	static
+../Core/Src/can.c:603:6:LogMessage	16	static
+../Core/Src/can.c:608:6:LogError	16	static

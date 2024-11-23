@@ -1,10 +1,10 @@
-09:08:55 **** Incremental Build of configuration Debug for project can_f1 ****
+22:40:51 **** Incremental Build of configuration Debug for project can_f1 ****
 make -j4 all 
 arm-none-eabi-size   can_f1.elf 
    text	   data	    bss	    dec	    hex	filename
-  15336	    100	   2028	  17464	   4438	can_f1.elf
+  16012	    100	   2036	  18148	   46e4	can_f1.elf
 Finished building: default.size.stdout
  
 
-09:08:55 Build Finished. 0 errors, 0 warnings. (took 207ms)
+22:40:51 Build Finished. 0 errors, 0 warnings. (took 191ms)
 

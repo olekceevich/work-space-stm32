@@ -1,0 +1,12 @@
+13:32:20 **** Incremental Build of configuration Debug for project can_stract_f4v2_index_active ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/can.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/can.d" -MT"Core/Src/can.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/can.o"
+arm-none-eabi-gcc -o "can_stract_f4v2_index_active.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\user\Desktop\work space stm32\STM32_PROGECT_LCD\can_stract_f4v2_index_active\STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="can_stract_f4v2_index_active.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+C:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/main.o: in function `HAL_GPIO_EXTI_Callback':
+C:/Users/user/Desktop/work space stm32/STM32_PROGECT_LCD/can_stract_f4v2_index_active/Debug/../Core/Src/main.c:318: undefined reference to `CAN1_Tx'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:64: can_stract_f4v2_index_active.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+
+13:32:20 Build Failed. 3 errors, 0 warnings. (took 753ms)
+

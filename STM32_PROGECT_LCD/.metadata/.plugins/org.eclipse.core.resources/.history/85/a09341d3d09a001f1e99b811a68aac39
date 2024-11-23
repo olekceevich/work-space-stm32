@@ -1,0 +1,21 @@
+
+
+#ifndef CAN_H
+#define CAN_H
+
+#include "stm32f4xx_hal.h"  // Замените на подходящую библиотеку HAL для вашего контроллера
+#include <stdint.h>
+#include <string.h>
+#include <stdio.h>
+
+
+// Экспортируемые функции для инициализации CAN, запроса температуры и обработки ошибок
+void CAN1_Init_Custom(void);
+void CAN1_RequestTemperature(uint8_t device_address);
+void CheckTemperatureOnButtonPress(void);
+void Error_handler(void);
+uint8_t Button_Is_Pressed(void);
+extern CAN_HandleTypeDef hcan1;
+extern UART_HandleTypeDef huart2;
+
+#endif // CAN_INTERFACE_H

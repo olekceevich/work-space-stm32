@@ -1,0 +1,26 @@
+#ifndef CAN_H
+#define CAN_H
+
+#include "stm32f4xx_hal.h"  // Библиотека HAL для STM32F4
+#include <stdint.h>
+#include <string.h>
+#include <stdio.h>
+
+// Функции для работы с CAN
+void CAN1_Init(void);                // Инициализация CAN
+void CAN1_Send(uint32_t stdId, uint8_t *data, uint8_t length); // Отправка сообщения по CAN
+void CAN1_Receive(void);             // Прием сообщений по CAN
+void RequestTemperatureData(void);    // Запрос данных о температуре
+void ProcessReceivedMessage(CAN_RxHeaderTypeDef *RxHeader, uint8_t *data); // Обработка полученного сообщения
+
+// Логирование
+void LogInfo(const char *message);   // Функция для вывода информационных сообщений
+void LogError(const char *message);   // Функция для вывода сообщений об ошибках
+
+// Обработка ошибок
+void Error_handler(void);             // Обработчик ошибок
+
+// Обработчик нажатия кнопки
+void ButtonPressed(void);             // Обработчик для нажатия кнопки
+
+#endif // CAN_H

@@ -1,0 +1,36 @@
+#ifndef CAN_H
+#define CAN_H
+
+#include "main.h"
+#include "stm32f1xx_hal.h"
+#include <stdint.h>
+
+// Инициализация и управление CAN
+void CAN_Init(void);                          // Инициализация CAN
+void StartActivationProcess(void);            // Запуск начального процесса активации
+void CAN_ProcessStateMachine(void);           // Основной автомат состояний активации
+void process_CAN_message(uint16_t received_ID, uint8_t *data, uint8_t DLC);  // Обработка входящих сообщений CAN
+void send_move_command(void);                 // Отправка команды движения (при необходимости)
+void send_nmt_command(uint8_t command, uint8_t node_id); // Отправка NMT команды (например, старт, стоп)
+
+// Определение состояний активации
+typedef enum {
+    STATE_INIT,                        // Начальное состояние
+    STATE_WAIT_BOOTLOADER_HEARTBEAT,   // Ожидание heartbeat от загрузчика
+    STATE_STARTUP,                     // Начальное состояние запуска
+    STATE_CONNECTED,                   // Состояние подключения устройства
+    STATE_STOPPED,                     // Состояние остановки устройства
+    STATE_GET_BOOTLOADER_VERSION,      // Запрос версии Bootloader
+    STATE_WAIT_FOR_VERSION_RESPONSE,   // Ожидание ответа с версией загрузчика
+    STATE_SEND_ACTIVATION,             // Отправка команды активации
+    STATE_CONFIRM_CANOPEN_MODE,        // Подтверждение перехода в режим CANopen
+    STATE_CHANGE_NODE_ID,              // Изменение идентификатора узла
+    STATE_ACTIVATION_FAILED,           // Состояние ошибки активации
+    STATE_ACTIVATION_COMPLETE          // Завершение процесса активации
+} ActivationState;
+
+// Функции логирования
+void LogMessage(const char *message);         // Вывод сообщения в UART
+void LogError(const char *message);           // Вывод сообщения об ошибке в UART
+
+#endif // CAN_H

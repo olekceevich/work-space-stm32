@@ -1,0 +1,10 @@
+14:59:22 **** Incremental Build of configuration Debug for project can_stract_f4v_active ****
+make -j4 all 
+arm-none-eabi-size   can_stract_f4v_active.elf 
+   text	   data	    bss	    dec	    hex	filename
+  17568	    100	   2084	  19752	   4d28	can_stract_f4v_active.elf
+Finished building: default.size.stdout
+ 
+
+14:59:22 Build Finished. 0 errors, 0 warnings. (took 245ms)
+

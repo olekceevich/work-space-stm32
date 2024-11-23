@@ -1,0 +1,64 @@
+#include "can.h"
+#include "main.h"
+
+// Экземпляры и внешние переменные
+extern CAN_HandleTypeDef hcan1;
+extern UART_HandleTypeDef huart2;
+
+// Функция инициализации CAN
+void CAN1_Init(void) {
+    LogInfo("Initializing CAN...");
+    if (HAL_CAN_Init(&hcan1) != HAL_OK) {
+        LogError("CAN Init Failed!");
+        Error_handler();
+    }
+    LogInfo("CAN Initialized Successfully");
+
+    // Настройка фильтра
+    CAN_FilterTypeDef canFilter;
+    canFilter.FilterActivation = ENABLE;
+    canFilter.FilterBank = 0;
+    canFilter.FilterFIFOAssignment = CAN_RX_FIFO0;
+    canFilter.FilterIdHigh = 0x0000;  // Установите нужные идентификаторы
+    canFilter.FilterIdLow = 0x0000;
+    canFilter.FilterMaskIdHigh = 0x0000;
+    canFilter.FilterMaskIdLow = 0x0000;
+    canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
+    canFilter.FilterScale = CAN_FILTERSCALE_32BIT;
+
+    if (HAL_CAN_ConfigFilter(&hcan1, &canFilter) != HAL_OK) {
+        LogError("CAN Filter Config Failed!");
+        Error_handler();
+    }
+    LogInfo("CAN Filter Configured Successfully");
+
+    // Включение уведомлений
+    if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK) {
+        LogError("CAN Notification Activation Failed!");
+        Error_handler();
+    }
+    LogInfo("CAN Notifications Activated");
+
+    // Запуск CAN
+    if (HAL_CAN_Start(&hcan1) != HAL_OK) {
+        LogError("CAN Start Failed!");
+        Error_handler();
+    }
+    LogInfo("CAN Started Successfully");
+
+    // Запрос данных о температуре
+    RequestTemperatureData();
+}
+
+// Функция для логирования сообщений
+void LogInfo(const char *message) {
+    char formattedMessage[100]; // Буфер для форматирования сообщения
+    snprintf(formattedMessage, sizeof(formattedMessage), "%s\r\n", message); // Добавляем перевод строки
+    HAL_UART_Transmit(&huart2, (uint8_t *)formattedMessage, strlen(formattedMessage), HAL_MAX_DELAY);
+}
+
+void LogError(const char *message) {
+    char formattedMessage[100]; // Буфер для форматирования сообщения
+    snprintf(formattedMessage, sizeof(formattedMessage), "%s\r\n", message); // Добавляем перевод строки
+    HAL_UART_Transmit(&huart2, (uint8_t *)formattedMessage, strlen(formattedMessage), HAL_MAX_DELAY);
+}

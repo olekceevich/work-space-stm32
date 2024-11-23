@@ -1,0 +1,7 @@
+../Core/Src/can.c:28:6:CAN1_Init	48	static
+../Core/Src/can.c:66:6:CAN_SendHeartbeat	48	static
+../Core/Src/can.c:85:6:HAL_CAN_RxFifo0MsgPendingCallback	104	static
+../Core/Src/can.c:101:6:UpdateHeartbeatState	16	static
+../Core/Src/can.c:107:6:CheckButtonAndSendHeartbeat	16	static
+../Core/Src/can.c:115:6:Heartbeat_Loop	16	static
+../Core/Src/can.c:124:6:Error_handler	4	static,ignoring_inline_asm
